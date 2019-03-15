@@ -1,11 +1,29 @@
 /* eslint-disable no-console */
-const defaultAwesomeFunction = require('../lib').default;
-const { awesomeFunction } = require('../lib');
+const pinyin2ipa = require('../lib');
+// const { awesomeFunction } = require('../lib');
 
-const defaultVal = defaultAwesomeFunction('Dinesh');
-const val = awesomeFunction();
+console.log(pinyin2ipa('nĭhăoma'));
 
-// defaultVal === 'I am the Default Awesome Function, fellow comrade! - Dinesh'
-console.log(defaultVal);
-// val === 'I am just an Awesome Function'
-console.log(val);
+console.log(pinyin2ipa('nĭhăoma', {
+    markNeutral: true
+}));
+
+console.log(pinyin2ipa('nĭhăoma', {
+    superscript: true
+}));
+
+console.log(pinyin2ipa('nĭhăoma', {
+    method: "sophisticated",
+    toneMarker: "chaonumber",
+    superscript: true
+}));
+
+console.log(pinyin2ipa('nĭhăoma', {
+    method: "sophisticated",
+    toneMarker: "chaoletter"
+}));
+
+console.log(pinyin2ipa('ni3hao3ma', {
+    toneMarker: "number",
+    superscript: true
+}));
