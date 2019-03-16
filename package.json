@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/Connum/npm-pinyin2ipa#readme",
   "dependencies": {
-    "pinyin-separate": "^1.0.4"
+    "pinyin-separate": "^1.0.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
