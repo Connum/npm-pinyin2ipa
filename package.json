@@ -11,7 +11,7 @@
     "test:watch": "npm test -- --watch",
     "test:examples": "node examples/",
     "lint": "eslint src test",
-    "build": "babel src --out-dir lib && npm run dist",
+    "build": "babel src --out-dir lib --copy-files && npm run dist",
     "dist": "browserify -p [ browserify-banner --file build/dist-banner.txt ] lib/index.js > dist/pinyin2ipa.js --standalone pinyin2ipa && cross-env BABEL_ENV=production babel src --out-dir build/temp && browserify -p [ browserify-banner --file build/dist-banner.txt ] -g uglifyify build/temp/index.js > dist/pinyin2ipa.min.js --standalone pinyin2ipa && rimraf build/temp",
     "prepublishOnly": "npm run clean && npm run lint && npm run test && npm run build"
   },

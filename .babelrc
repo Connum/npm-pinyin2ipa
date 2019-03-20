@@ -3,8 +3,7 @@
     "development": {
       "presets": ["env"],
       "plugins": [
-        "add-module-exports",
-        "inline-json-import"
+        "add-module-exports"
       ]
     },
     "production": {
