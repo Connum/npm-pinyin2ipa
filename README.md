@@ -1,4 +1,4 @@
-# NPM pinyin2ipa
+# pinyin2ipa
 
 [![dependencies Status](https://david-dm.org/Connum/npm-pinyin2ipa/status.svg)](https://david-dm.org/Connum/npm-pinyin2ipa) [![devDependencies Status](https://david-dm.org/Connum/npm-pinyin2ipa/dev-status.svg)](https://david-dm.org/Connum/npm-pinyin2ipa?type=dev) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -7,6 +7,8 @@ Converts Mandarin Chinese Pinyin notation to IPA (International Phonetic Alphabe
 
 # Installation
 `npm install pinyin2ipa`
+
+or use the files in `/dist` or from the [releases](https://github.com/Connum/npm-pinyin2ipa/releases) for direct in-browser usage.
 
 # Usage and examples
 ```js
