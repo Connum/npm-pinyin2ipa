@@ -8,7 +8,13 @@
       ]
     },
     "production": {
-      "presets": ["env", "minify"],
+      "presets": ["env", ["minify", {
+        "builtIns": false,
+        "mangle": { "topLevel": true },
+        "regexpConstructors": false,
+        "evaluate": false
+      }]],
+      "comments": false,
       "plugins": [
         "add-module-exports",
         "inline-json-import"
