@@ -1,6 +1,6 @@
 # pinyin2ipa
 
-[![dependencies Status](https://david-dm.org/Connum/npm-pinyin2ipa/status.svg)](https://david-dm.org/Connum/npm-pinyin2ipa) [![devDependencies Status](https://david-dm.org/Connum/npm-pinyin2ipa/dev-status.svg)](https://david-dm.org/Connum/npm-pinyin2ipa?type=dev) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![dependencies Status](https://david-dm.org/Connum/npm-pinyin2ipa/status.svg)](https://david-dm.org/Connum/npm-pinyin2ipa) [![devDependencies Status](https://david-dm.org/Connum/npm-pinyin2ipa/dev-status.svg)](https://david-dm.org/Connum/npm-pinyin2ipa?type=dev) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)  [![npm total downloads](https://img.shields.io/npm/dt/pinyin2ipa.svg)](https://www.npmjs.com/package/pinyin2ipa)
 
 Converts Mandarin Chinese Pinyin notation to IPA (International Phonetic Alphabet) notation. Supports different methods of transliteration, by default using an approach by the 
 
