@@ -1,5 +1,5 @@
 /*!
- * pinyin2ipa v1.0.2 (March 20th 2019)
+ * pinyin2ipa v1.0.2 (July 19th 2019)
  * Converts Mandarin Chinese pinyin notation to IPA (international phonetic alphabet) notation
  * 
  * https://github.com/Connum/npm-pinyin2ipa#readme
