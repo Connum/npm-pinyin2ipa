@@ -1,5 +1,5 @@
 /*!
- * pinyin2ipa v1.0.2 (July 19th 2019)
+ * pinyin2ipa v1.0.4 (July 19th 2022)
  * Converts Mandarin Chinese pinyin notation to IPA (international phonetic alphabet) notation
  * 
  * https://github.com/Connum/npm-pinyin2ipa#readme
@@ -1031,14 +1031,21 @@ module.exports={
 // @ts-check
 
 var vowels = 'aāáǎăàeēéěĕèiīíǐĭìoōóǒŏòuūúǔŭùüǖǘǚǚü̆ǜvv̄v́v̆v̌v̀';
-var tones = 'āáǎăàēéěĕèīíǐĭìōóǒŏòūúǔŭùǖǘǚǚü̆ǜv̄v́v̆v̌v̀';
+var tones = 'ā|á|ǎ|ă|à|ē|é|ě|ĕ|è|ī|í|ǐ|ĭ|ì|ō|ó|ǒ|ŏ|ò|ū|ú|ǔ|ŭ|ù|ǖ|ǘ|ǚ|ǚ|ü̆|ǜ|v̄|v́|v̆|v̌|v̀';
+var initials = 'b|p|m|f|d|t|n|l|g|k|h|j|q|x|zh|ch|sh|r|z|c|s';
 function separate(pinyin) {
   return pinyin.replace(/'/g, ' ') // single quote used for separation
+  .replace(new RegExp('(' + tones + ')(' + tones + ')', 'gi'), '$1 $2') // split two consecutive tones
   .replace(new RegExp('([' + vowels + '])([^' + vowels + 'nr])', 'gi'), '$1 $2') // This line does most of the work
   .replace(new RegExp('(\\w)([csz]h)', 'gi'), '$1 $2') // double-consonant initials
   .replace(new RegExp('([' + vowels + ']{2}(ng? )?)([^\\snr])', 'gi'), '$1 $3') // double-vowel finals
   .replace(new RegExp('([' + vowels + ']{2})(n[' + vowels + '])', 'gi'), '$1 $2') // double-vowel followed by n initial
   .replace(new RegExp('(n)([^' + vowels + 'vg])', 'gi'), '$1 $2') // cleans up most n compounds
+  .replace(new RegExp('((ch|sh|(y|b|p|m|f|d|t|n|l|j|q|x)i)(a|\u0101|\xE1|\u01CE|\u0103|\xE0)) (o)', 'gi'), '$1$5') // fix https://github.com/Connum/npm-pinyin-separate/issues/1
+  .replace(new RegExp('(w|gu|ku|hu|zhu|chu|shu)(a|\u0101|\xE1|\u01CE|\u0103|\xE0) (i)', 'gi'), '$1$2$3') // fix "i" being split from syllables ending in (u)ai
+  .replace(new RegExp('((a|\u0101|\xE1|\u01CE|\u0103|\xE0)o)(' + initials + ')', 'gi'), '$1 $3') // fix syllable ending in ao followed by another syllable
+  .replace(new RegExp('((o|\u014D|\xF3|\u01D2|\u014F|\xF2)u)(' + initials + ')', 'gi'), '$1 $3') // fix syllable ending in ou followed by another syllable
+  .replace(new RegExp('(y(u|\u016B|\xFA|\u01D4|\u016D|\xF9|\xFC|\u01D6|\u01D8|\u01DA|u\u0308\u030C|u\u0308\u0306|\u01DC|v|v\u0304|v\u0301|v\u0306|v\u030C|v\u0300))(n)(u|\u016B|\xFA|\u01D4|\u016D|\xF9|\xFC|\u01D6|\u01D8|\u01DA|u\u0308\u030C|u\u0308\u0306|\u01DC|v|v\u0304|v\u0301|v\u0306|v\u030C|v\u0300)', 'gi'), '$1 $3$4') // fix two "u" (or "ü") separated by an "n" not being split
   .replace(new RegExp('([' + vowels + 'v])([^' + vowels + '\\w\\s])([' + vowels + 'v])', 'gi'), '$1 $2$3') // assumes correct Pinyin (i.e., no missing apostrophes)
   .replace(new RegExp('([' + vowels + 'v])(n)(g)([' + vowels + 'v])', 'gi'), '$1$2 $3$4') // assumes correct Pinyin, i.e. changan = chan + gan
   .replace(new RegExp('([gr])([^' + vowels + '])', 'gi'), '$1 $2') // fixes -ng and -r finals not followed by vowels
@@ -1060,16 +1067,16 @@ module.exports = function separatePinyinInSyllables(pinyin, separateBySpaces) {
   var pinyinSeparated = separate(pinyin).split(' ');
   var newPinyin = [];
 
-  pinyinSeparated.forEach(function (p) {
+  pinyinSeparated.forEach(function (p, i) {
     var totalTones = 1;
-    var pregMatch = p.match(new RegExp('([' + tones + '])', 'g'));
+    var pregMatch = p.match(new RegExp('(' + tones + ')', 'g'));
     if (pregMatch) {
       totalTones = pregMatch.length;
     }
 
     if (p.length > 4 || totalTones > 1) {
       separate(p).split(' ').forEach(function (newP) {
-        pregMatch = newP.match(new RegExp('([' + tones + '])', 'g'));
+        pregMatch = newP.match(new RegExp('(' + tones + ')', 'g'));
         if (pregMatch) {
           totalTones = pregMatch.length;
         }
